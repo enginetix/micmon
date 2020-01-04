@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace micmon
         public Form2()
         {
             InitializeComponent();
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                this.Text = string.Format("Your application name - v{0}",
+                    ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
+            }
         }
 
         private void Form2_Load(object sender, EventArgs e)
