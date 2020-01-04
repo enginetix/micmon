@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace micmon
 {
-
     public partial class Form1 : Form
     {
         private static double audioValueMax = 1;
@@ -23,6 +22,9 @@ namespace micmon
         private readonly double fracLevel = .1; //% of stored maximun level
         private readonly double lowOpacity = .1;
         private readonly int delayTime = 1000; //time at 100% Opacity in ms
+
+        private bool mouseDown;
+        private Point lastLocation;
 
         public Form1()
         {
@@ -103,6 +105,28 @@ namespace micmon
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
     }
 }
