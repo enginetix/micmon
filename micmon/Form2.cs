@@ -18,7 +18,7 @@ namespace micmon
             InitializeComponent();
             if (ApplicationDeployment.IsNetworkDeployed)
             {
-                this.Text = string.Format("Your application name - v{0}",
+                this.Text = string.Format("About micmon - v{0}",
                     ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
             }
         }
